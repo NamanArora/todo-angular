@@ -1,12 +1,27 @@
+<div id="all">
 <h1>
   {{title}}
 </h1>
+
 <form [formGroup]="myForm">
-  <label>Enter todo</label>
-<input type="text"  formControlName="indata" (keyup.enter)="addTodo()" required>
+  <md-input-container>
+<input md-input type="text" placeholder="Enter your todo here" formControlName="indata" (keyup.enter)="addTodo()" required />
+
+</md-input-container>
+<button md-raised-button  (click)="addTodo()" >Enter</button>
 </form>
 <ul>
-<li *ngFor="let item of list" (click)="delete(item.id)">
+<li *ngFor="let item of list">
+  <md-card>
+    <md-card-title>
 {{item.name}}
+</md-card-title>
+<md-card-actions>
+        <button md-button>LIKE</button>
+        <button (click)="delete(item.id)" md-button>DELETE</button>
+   </md-card-actions>
+</md-card>
 </li>
 </ul>
+
+</div>

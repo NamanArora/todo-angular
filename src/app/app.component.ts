@@ -42,7 +42,7 @@ export class AppComponent {
 
   addTodo(): void
   {
-
+    //console.log("called");
     if(this.todo.name!="")
     {
     console.log(this.todo.name);
