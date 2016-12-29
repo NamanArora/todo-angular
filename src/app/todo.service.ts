@@ -12,6 +12,7 @@ export class TodoService {
 
   addTodo(todo: Todo)
   {
+    //console.log(todo.name);
     todo.id = this.id+1;
     this.id+=1;
     this.todos.push(todo);
