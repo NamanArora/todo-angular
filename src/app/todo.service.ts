@@ -12,7 +12,6 @@ export class TodoService {
 
   addTodo(todo: Todo)
   {
-    //console.log(todo.name);
     todo.id = this.id+1;
     this.id+=1;
     this.todos.push(todo);
@@ -25,7 +24,8 @@ export class TodoService {
 
   deleteTodo(id: number)
   {
-    this.todos = this.todos.filter(data => data.id !== id);
+    let obj =  this.todos.filter(data => data.id === id);
+    obj[0].state = 'dismissed';
   }
 
 }

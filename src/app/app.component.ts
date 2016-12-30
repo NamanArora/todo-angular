@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  Input,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import {TodoService} from './todo.service';
 import {Todo} from './todo';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -7,7 +15,21 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   selector: 'app-root',
   templateUrl: './app.component.html',
   providers: [TodoService],
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('state', [
+      state('active', style({transform: 'translateX(0)'})),
+      state('dismissed', style({display: "none"})),
+      transition('void => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate(100)
+      ]),
+      transition('* => dismissed', [
+        animate(100, style({transform: 'translateX(100%)'}))
+      ])
+    ])
+  ]
+
 })
 export class AppComponent {
   title = 'Todo app!';
@@ -42,12 +64,9 @@ export class AppComponent {
 
   addTodo(): void
   {
-    //console.log("called");
     if(this.todo.name!="")
-    {
-    console.log(this.todo.name);
-    this.todoService.addTodo(this.todo);
-    }
+      this.todoService.addTodo(this.todo);
+
     this.todo = new Todo();
     this.myForm.setValue({indata: ""});
     this.fetch();
@@ -56,7 +75,6 @@ export class AppComponent {
   fetch()
   {
     this.list = this.todoService.getAllTodo();
-    //console.log(this.list.values);
   }
 
 }

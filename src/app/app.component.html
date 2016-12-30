@@ -11,7 +11,7 @@
 <button md-raised-button  (click)="addTodo()" >Enter</button>
 </form>
 <ul>
-<li *ngFor="let item of list">
+<li *ngFor="let item of list" [@state]="item.state">
   <md-card>
     <md-card-title>
 {{item.name}}
